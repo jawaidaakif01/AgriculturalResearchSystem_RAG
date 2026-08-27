@@ -2,5 +2,12 @@ langchain
 langchain-community
 langchain-core
 langchain-google-genai
-tavily
+tavily-python
 python-dotenv
+requests
+beautifulsoup4
+pdfplumber
+faiss-cpu
+langchain-huggingface
+sentence-transformers
+langchain-text-splitters
