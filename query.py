@@ -1,5 +1,12 @@
 import argparse
 import sys
+import io
+
+# Force UTF-8 output so Windows cp1252 terminal doesn't choke on scientific
+# Unicode characters (superscripts, Greek letters, etc.) in Gemini's report.
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+
 from retrieval_utils import load_vector_store, docs_to_records
 from full_text_fetch import augment_with_full_text
 from generate_report import generate_report
@@ -36,7 +43,7 @@ def main():
     report = generate_report(args.query, augmented_records)
     
     print("\n" + "="*80)
-    print("📋 FINAL RESEARCH REPORT")
+    print("FINAL RESEARCH REPORT")
     print("="*80 + "\n")
     print(report)
     print("\n" + "="*80)

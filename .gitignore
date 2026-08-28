@@ -220,3 +220,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 agris_filtered.json
+
+# Project-specific ignores
+faiss_index/        # ~812MB FAISS binary — too large for GitHub, regenerate with ingest.py
+test_emb.py         # Temporary debugging script
+tiny.json           # Temporary test data

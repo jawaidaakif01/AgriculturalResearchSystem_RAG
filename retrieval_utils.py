@@ -9,6 +9,10 @@ script both produce/consume the same shape, so nothing breaks silently
 if one side changes field names.
 """
 
+import os
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
+import torch
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
@@ -18,8 +22,29 @@ INDEX_DIR = "faiss_index"
 
 def get_embeddings():
     """Must be used identically at ingestion time AND query time —
-    mismatched embedding models silently produce garbage similarity scores."""
-    return HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+    mismatched embedding models silently produce garbage similarity scores.
+
+    Uses GPU (CUDA) automatically if available — critical for reasonable
+    embedding speed on the full 64K-record corpus. Falls back to CPU if
+    no GPU/CUDA-enabled torch is detected, so this still works on any
+    machine, just slower.
+
+    batch_size is deliberately conservative (16) for 4GB-class GPUs like
+    the RTX 2050 — bge-base plus CUDA/cuDNN overhead can eat 2GB+ before
+    encoding even starts, leaving limited headroom. Raise this if you
+    have a bigger GPU and want more throughput.
+    """
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"[retrieval_utils] Embedding device: {device}"
+          + ("" if device == "cuda" else
+             " (no CUDA GPU detected — install a CUDA-enabled torch build "
+             "if you have an NVIDIA GPU, this will be much slower on CPU)"))
+
+    return HuggingFaceEmbeddings(
+        model_name=EMBEDDING_MODEL_NAME,
+        model_kwargs={"device": device},
+        encode_kwargs={"normalize_embeddings": True, "batch_size": 16},
+    )
 
 
 def load_vector_store():
