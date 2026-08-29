@@ -1,7 +1,7 @@
 [project]
 name = "intelligentresearchassistant"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agricultural Research System RAG"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -15,18 +15,12 @@ dependencies = [
     "langchain-huggingface>=1.2.2",
     "langchain-text-splitters>=1.1.2",
     "pdfplumber>=0.11.10",
+    "pypdf>=6.16.2",
     "python-dotenv>=1.2.3",
+    "reportlab>=5.0.1",
     "requests>=2.34.2",
     "sentence-transformers>=6.0.0",
-    "tavily>=1.1.0",
+    "streamlit>=1.62.0",
     "tavily-python>=0.8.0",
-    "torch>=2.13.0",
+    "torch>=2.2.0",
 ]
-
-[[tool.uv.index]]
-name = "pytorch-cu126"
-url = "https://download.pytorch.org/whl/cu126"
-explicit = true
-
-[tool.uv.sources]
-torch = { index = "pytorch-cu126" }

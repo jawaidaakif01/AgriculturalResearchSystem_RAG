@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="multiprocessing.resource_tracker")
 import argparse
 import sys
 import io
