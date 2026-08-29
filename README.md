@@ -160,24 +160,3 @@ uv run python evaluate_fulltext_coverage.py --input agris_filtered.json --sample
 
 ---
 
-## Technical Specifications
-
-| Component | Specification |
-| --- | --- |
-| **Embedding Model** | `BAAI/bge-base-en-v1.5` (768 dimensions)
-
- |
-| **Vector Index** | FAISS (`IndexFlatL2`)
-
- |
-| **Synthesis LLM** | Google Gemini 2.0 Flash |
-| **Fallback Engine** | Tavily Search API (`advanced` search depth) |
-| **PDF Extraction** | `pdfplumber` / `pypdf`<br> |
-| **PDF Export Engine** | ReportLab |
-| **Acceleration** | NVIDIA CUDA, Apple Silicon (MPS), and CPU fallback
-
- |
-
-```
-
-```
