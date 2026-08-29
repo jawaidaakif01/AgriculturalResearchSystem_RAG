@@ -21,24 +21,12 @@ INDEX_DIR = "faiss_index"
 
 
 def get_embeddings():
-    """Must be used identically at ingestion time AND query time —
-    mismatched embedding models silently produce garbage similarity scores.
-
-    Uses GPU (CUDA) automatically if available — critical for reasonable
-    embedding speed on the full 64K-record corpus. Falls back to CPU if
-    no GPU/CUDA-enabled torch is detected, so this still works on any
-    machine, just slower.
-
-    batch_size is deliberately conservative (16) for 4GB-class GPUs like
-    the RTX 2050 — bge-base plus CUDA/cuDNN overhead can eat 2GB+ before
-    encoding even starts, leaving limited headroom. Raise this if you
-    have a bigger GPU and want more throughput.
+    """Must be used identically at ingestion time AND query time.
+    Uses CUDA on NVIDIA GPUs, and CPU on Mac/others for C-level stability.
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"[retrieval_utils] Embedding device: {device}"
-          + ("" if device == "cuda" else
-             " (no CUDA GPU detected — install a CUDA-enabled torch build "
-             "if you have an NVIDIA GPU, this will be much slower on CPU)"))
+
+    print(f"[retrieval_utils] Embedding device: {device}", flush=True)
 
     return HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL_NAME,
@@ -47,16 +35,18 @@ def get_embeddings():
     )
 
 
-def load_vector_store():
+def load_vector_store(index_dir=INDEX_DIR):
+    """Loads the pre-built FAISS vector store from disk."""
     embeddings = get_embeddings()
-    return FAISS.load_local(INDEX_DIR, embeddings, allow_dangerous_deserialization=True)
+    return FAISS.load_local(index_dir, embeddings, allow_dangerous_deserialization=True)
 
 
 def docs_to_records(docs):
     """docs: list of LangChain Document objects returned by a similarity search.
     Returns: list of plain dicts matching the shape full_text_fetch.py and
     generate_report.py expect. Deduplicates by source_id, since multiple
-    chunks from the same paper can both show up in top-k results."""
+    chunks from the same paper can both show up in top-k results.
+    """
     seen_sources = set()
     records = []
     for doc in docs:

@@ -29,7 +29,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
-MODEL_NAME = "gemini-3.5-flash"  # swap for a different Gemini model if you prefer
+MODEL_NAME = "gemini-3.6-flash"  # swap for a different Gemini model if you prefer
 
 SYSTEM_INSTRUCTIONS = """You are an agricultural research assistant. You generate research reports \
 for users based ONLY on the sources provided to you below — never from general/prior knowledge.
