@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #17362a;
+  --leaf: #1e5b3a;
+  --leaf-dark: #123c29;
+  --grain: #d89a2d;
+  --cream: #f8f4e8;
+  --paper: #ffffff;
+  --mist: #e7efe4;
+  --line: #d6dfd1;
+}
+
+/* Hide Default Streamlit Sidebar & Header */
+[data-testid="stSidebar"], 
+header[data-testid="stHeader"] {
+  display: none !important;
+}
+
+/* Global Light Reset */
+html, body, [class*="st-"] {
+  font-family: "DM Sans", sans-serif !important;
+  color: var(--ink) !important;
+  background-color: transparent;
+}
+
+.brand-serif {
+  font-family: "Fraunces", serif !important;
+}
+
+.stApp {
+  background: radial-gradient(circle at 10% 8%, rgba(220, 174, 74, 0.18), transparent 30rem),
+              linear-gradient(180deg, #f8f4e8 0%, #edf2e9 100%) !important;
+  color: var(--ink) !important;
+}
+
+.main .block-container {
+  max-width: 1080px !important;
+  padding-top: 2rem !important;
+  padding-bottom: 5rem !important;
+  margin: 0 auto !important;
+}
+
+/* Top Branding Header */
+.site-header {
+  position: relative;
+  overflow: hidden;
+  background-color: #17362a;
+  color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.25rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 16px 42px rgba(27, 65, 39, 0.12);
+}
+
+.field-lines {
+  background-image: repeating-linear-gradient(
+    -22deg,
+    transparent 0,
+    transparent 16px,
+    rgba(255, 255, 255, 0.07) 17px,
+    rgba(255, 255, 255, 0.07) 18px
+  );
+}
+
+.soft-shadow {
+  box-shadow: 0 14px 35px rgba(27, 65, 39, 0.07);
+}
+
+.paper-texture {
+  background-color: #ffffff !important;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+}
+
+/* Code and Tag Styling */
+code, pre, .mono-font {
+  font-family: 'JetBrains Mono', monospace !important;
+  background-color: #e8f0e5 !important;
+  color: #166534 !important;
+  padding: 0.2rem 0.45rem !important;
+  border-radius: 6px !important;
+  border: 1px solid #c8ddc7 !important;
+  font-size: 0.88rem !important;
+}
+
+/* Input Fields */
+div[data-testid="stTextArea"],
+div[data-baseweb="textarea"], 
+div[data-baseweb="textarea"] > div,
+div[data-baseweb="base-input"],
+div[data-baseweb="input"] {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+div[data-baseweb="textarea"] {
+  background-color: #ffffff !important;
+  border: 1.5px solid #cbd8c9 !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  overflow: hidden !important;
+}
+
+div[data-baseweb="textarea"]:focus-within {
+  border-color: #1e5b3a !important;
+  box-shadow: 0 0 0 3px rgba(216, 154, 45, 0.35) !important;
+}
+
+textarea, input {
+  background-color: #ffffff !important;
+  color: #17362a !important;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  padding: 1rem 1.25rem !important;
+}
+
+textarea::placeholder, input::placeholder {
+  color: #7b8e7e !important;
+  opacity: 1 !important;
+}
+
+/* Curvy PDF Uploader Box */
+[data-testid="stFileUploader"] {
+  background-color: #ffffff !important;
+  border: 1.5px dashed #86efac !important;
+  border-radius: 1.5rem !important;
+  padding: 1.25rem 1.5rem !important;
+  min-height: 135px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+[data-testid="stFileUploader"] section {
+  background-color: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0 !important;
+}
+
+[data-testid="stFileUploader"] section button {
+  background-color: #dcfce7 !important;
+  border: 1.5px solid #86efac !important;
+  border-radius: 12px !important;
+  padding: 0.6rem 1.2rem !important;
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  box-shadow: 0 2px 6px rgba(22, 101, 52, 0.08) !important;
+}
+
+[data-testid="stFileUploader"] section button * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+[data-testid="stFileUploader"] section button::after {
+  content: "Upload File (PDF)" !important;
+  font-size: 0.88rem !important;
+  line-height: 1.2 !important;
+  color: #166534 !important;
+  font-weight: 700 !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+[data-testid="stFileUploader"] section button:hover {
+  background-color: #bbf7d0 !important;
+  border-color: #4ade80 !important;
+}
+
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span,
+[data-testid="stFileUploader"] p {
+  color: #4b6358 !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+/* Primary Generate Button */
+div[data-testid="stButton"] > button[kind="primary"] {
+  background-color: #ffffff !important;
+  color: #166534 !important;
+  border: 1.5px solid #86efac !important;
+  border-radius: 9999px !important;
+  padding: 0.65rem 2.25rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(22, 101, 52, 0.10) !important;
+  transition: all 0.2s ease !important;
+}
+
+div[data-testid="stButton"] > button[kind="primary"]:hover {
+  background-color: #d1fae5 !important;
+  border-color: #34d399 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Secondary Action Button (Ask Again) */
+div[data-testid="stButton"] > button[kind="secondary"] {
+  background-color: #ffffff !important;
+  color: #17362a !important;
+  border: 1.5px solid #cbd8c9 !important;
+  border-radius: 9999px !important;
+  padding: 0.65rem 2rem !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+div[data-testid="stButton"] > button[kind="secondary"]:hover {
+  background-color: #f7faf6 !important;
+  border-color: #1e5b3a !important;
+  color: #1e5b3a !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Tabs */
+div[data-baseweb="tab-list"] {
+  background-color: transparent !important;
+  border-bottom: 2px solid #d6dfd1 !important;
+  gap: 1rem !important;
+}
+
+div[data-baseweb="tab"] {
+  background-color: transparent !important;
+  color: #4b6358 !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding: 0.6rem 1rem !important;
+}
+
+div[data-baseweb="tab"][aria-selected="true"] {
+  color: #1e5b3a !important;
+  border-bottom-color: #1e5b3a !important;
+  font-weight: 700 !important;
+}
+
+/* ======================================================= */
+/* CRITICAL FIX: RESET EXPANDER COLLISION & OVERLAPPING   */
+/* ======================================================= */
+div[data-testid="stExpander"] {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd8c9 !important;
+  border-radius: 1rem !important;
+  margin-bottom: 1rem !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  overflow: visible !important;
+}
+
+/* Ensure expander summary stays relative and single-flow */
+div[data-testid="stExpander"] summary {
+  background-color: #ffffff !important;
+  color: #17362a !important;
+  font-weight: 700 !important;
+  padding: 0.85rem 1.25rem !important;
+  line-height: 1.5 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+div[data-testid="stExpander"] summary:hover {
+  background-color: #f7faf6 !important;
+  color: #1e5b3a !important;
+}
+
+/* Prevent injected Streamlit labels from colliding */
+div[data-testid="stExpander"] summary > div {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  width: 100% !important;
+}
+
+/* Remove all pseudo elements causing colliding text */
+div[data-testid="stExpander"] summary::before,
+div[data-testid="stExpander"] summary::after,
+div[data-testid="stExpander"] summary *::before,
+div[data-testid="stExpander"] summary *::after {
+  content: none !important;
+}
+
+/* Fix Status Box Collision */
+div[data-testid="stStatusWidget"] {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd8c9 !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+}
+
+div[data-testid="stStatusWidget"] summary {
+  background-color: #ffffff !important;
+  padding: 0.75rem 1.25rem !important;
+}
+
+div[data-testid="stStatusWidget"] summary::before,
+div[data-testid="stStatusWidget"] summary::after {
+  content: none !important;
+}
+
+/* Alert Boxes */
+div[data-testid="stAlert"] {
+  background-color: #f4f9f3 !important;
+  color: #1b4332 !important;
+  border: 1px solid #cce3cb !important;
+  border-radius: 12px !important;
+}
+
+/* Export / Download Buttons */
+div[data-testid="stDownloadButton"] > button {
+  background-color: #ffffff !important;
+  color: #17362a !important;
+  border: 1.5px solid #cbd8c9 !important;
+  border-radius: 12px !important;
+  padding: 0.6rem 1.2rem !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.2s ease !important;
+}
+
+div[data-testid="stDownloadButton"] > button:hover {
+  background-color: #f0fdf4 !important;
+  border-color: #86efac !important;
+  color: #166534 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Route Badges */
+.badge-rag {
+  background-color: #e4f0e1 !important;
+  color: #1e5b3a !important;
+  border: 1px solid #a3cfbb !important;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.badge-web {
+  background-color: #fff5dd !important;
+  color: #a36712 !important;
+  border: 1px solid #f6d899 !important;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.badge-pdf {
+  background-color: #d8f3dc !important;
+  color: #1b4332 !important;
+  border: 1px solid #95d5b2 !important;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* Report Content Typography */
+.report-content {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  padding: 2.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.report-content h1, 
+.report-content h2, 
+.report-content h3 {
+  font-family: "Fraunces", serif !important;
+  color: var(--leaf-dark) !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.report-content p, 
+.report-content li {
+  color: #374a3f !important;
+  line-height: 1.8 !important;
+}
