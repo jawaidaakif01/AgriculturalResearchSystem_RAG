@@ -1,14 +1,15 @@
+
 # AgriSearch AI — Evidence-Backed Agricultural Research System (RAG)
 
-An enterprise-grade, retrieval-augmented generation (RAG) platform that ingests peer-reviewed agricultural literature from the FAO AGRIS corpus, dynamically discovers and extracts full-text scientific PDFs at query time, and autonomously triggers live web search when research questions fall outside the local index boundary.
+An enterprise-grade, retrieval-augmented generation (RAG) platform that ingests peer-reviewed agricultural literature from the FAO AGRIS corpus, dynamically discovers and extracts full-text scientific PDFs at query time, and autonomously triggers live web search when research questions fall outside the local index boundary[cite: 1].
 
 ---
 
 ## Core Capabilities
 
-* **FAO AGRIS Literature Ingestion**: Crawls and structures thousands of peer-reviewed records containing metadata, subjects, and publication dates.
-* **Vector Semantic Retrieval**: Encodes scientific text using `BAAI/bge-base-en-v1.5` embeddings into a local FAISS vector store.
-* **Query-Time Full-Text Harvesting**: Dynamically extracts full-text scientific PDFs (via `pdfplumber`) for retrieved chunks rather than relying solely on abstracts.
+* **FAO AGRIS Literature Ingestion**: Crawls and structures thousands of peer-reviewed records containing metadata, subjects, and publication dates[cite: 1].
+* **Vector Semantic Retrieval**: Encodes scientific text using `BAAI/bge-base-en-v1.5` embeddings into a local FAISS vector store[cite: 1].
+* **Query-Time Full-Text Harvesting**: Dynamically extracts full-text scientific PDFs (via `pdfplumber`) for retrieved chunks rather than relying solely on abstracts[cite: 1].
 * **Calibrated Web Fallback Routing**: Evaluates semantic relevance ($0.75$ L2 distance threshold); out-of-domain queries trigger Tavily Live Web Search automatically.
 * **Custom Document Upload**: Supports direct upload and text parsing of user-supplied agricultural PDFs using `pypdf`.
 * **Multi-Format Export**: Generates downloadable styled PDF reports via `reportlab`, alongside raw Markdown and JSON retrieval metadata.
@@ -43,7 +44,14 @@ An enterprise-grade, retrieval-augmented generation (RAG) platform that ingests 
                                                │
                                                ▼
                           [ Interactive Workspace / PDF Export ]
-Repository Structure:
+
+```
+
+---
+
+## Repository Structure
+
+```text
 ├── app.py                         # Streamlit interactive application with state management & ReportLab PDF export
 ├── style.css                      # Custom stylesheet for typography, cards, and upload elements
 ├── crawl_agris.py                 # DCAT XML crawler and parser for the FAO AGRIS repository
@@ -57,63 +65,119 @@ Repository Structure:
 ├── pyproject.toml                 # uv project configuration and dependency specifications
 └── .env.example                   # Environment configuration template
 
-Installation & Setup
-Prerequisites
-Python >= 3.12
-uv package manager
-1. Clone the Repository
-Bash
+```
+
+---
+
+## Installation & Setup
+
+### Prerequisites
+
+* Python `>= 3.12`
+
+* [`uv`](https://docs.astral.sh/uv/) package manager
+
+### 1. Clone the Repository
+
+```bash
 git clone [https://github.com/jawaidaakif01/AgriculturalResearchSystem_RAG.git](https://github.com/jawaidaakif01/AgriculturalResearchSystem_RAG.git)
 cd AgriculturalResearchSystem_RAG
-2. Configure Environment Variables
-Copy the template file to .env:
-Bash
+
+```
+
+### 2. Configure Environment Variables
+
+Copy the template file to `.env`:
+
+```bash
 cp .env.example .env
-Populate .env with your API credentials:
-Code snippet
+
+```
+
+Populate `.env` with your API credentials:
+
+```env
 GOOGLE_API_KEY=your_gemini_api_key_here
 TAVILY_API_KEY=your_tavily_api_key_here
 HF_TOKEN=your_huggingface_read_token_here
-3. Install Dependencies
-Bash
+
+```
+
+### 3. Install Dependencies
+
+```bash
 uv sync
-Usage
-Interactive Web Application
+
+```
+
+---
+
+## Usage
+
+### Interactive Web Application
+
 Launch the Streamlit dashboard:
-Bash
+
+```bash
 uv run streamlit run app.py
-Command-Line Interface (CLI)
+
+```
+
+### Command-Line Interface (CLI)
+
 Run queries directly in the terminal:
-Bash
+
+```bash
 # In-Domain Query (Uses Local FAISS Index + Full-Text PDF Augmentation)
 uv run python query.py "What are effective methods for controlling Cercospora leaf spot in sugar beets?"
 
 # Out-of-Domain Query (Triggers Tavily Live Web Fallback)
 uv run python query.py "What are the latest advancements in quantum computing superconducting qubits?"
-Ingestion & Diagnostics
-Build Local FAISS Index
+
+```
+
+---
+
+## Ingestion & Diagnostics
+
+### Build Local FAISS Index
+
 To chunk, embed, and index an AGRIS dataset:
-Bash
+
+```bash
 uv run python ingest.py --input agris_filtered.json --index_dir faiss_index
-Evaluate Full-Text Harvesting Coverage
+
+```
+
+### Evaluate Full-Text Harvesting Coverage
+
 To benchmark PDF extraction yield across open-access repositories:
-Bash
+
+```bash
 uv run python evaluate_fulltext_coverage.py --input agris_filtered.json --sample_size 50
-Technical Specifications
-Component	Specification
-Embedding Model	
-BAAI/bge-base-en-v1.5 (768 dimensions)[cite: 1]
 
-Vector Index	
-FAISS (IndexFlatL2)[cite: 1]
+```
 
-Synthesis LLM	Google Gemini 2.0 Flash
-Fallback Engine	Tavily Search API (advanced search depth)
-PDF Extraction	
-pdfplumber / pypdf
+---
 
-[cite: 1]
+## Technical Specifications
 
-PDF Export Engine	ReportLab
-Acceleration	
-NVIDIA CUDA, Apple Silicon (MPS), and CPU fallback[cite: 1]
+| Component | Specification |
+| --- | --- |
+| **Embedding Model** | `BAAI/bge-base-en-v1.5` (768 dimensions)
+
+ |
+| **Vector Index** | FAISS (`IndexFlatL2`)
+
+ |
+| **Synthesis LLM** | Google Gemini 2.0 Flash |
+| **Fallback Engine** | Tavily Search API (`advanced` search depth) |
+| **PDF Extraction** | `pdfplumber` / `pypdf`<br> |
+| **PDF Export Engine** | ReportLab |
+| **Acceleration** | NVIDIA CUDA, Apple Silicon (MPS), and CPU fallback
+
+ |
+
+```
+
+```
